@@ -77,6 +77,37 @@ namespace TicTakToe.Kata.UnitTests
         }
 
         [Test]
+        public void ConsiderVerticalWinningX()
+        {
+            var game = new TicTakToeGame();
+            game.PlayX(RowColumn.TopLeft);
+            game.PlayY(RowColumn.BottomRight);
+            game.PlayX(RowColumn.CenterLeft);
+            game.PlayY(RowColumn.BottomMiddle);
+            game.PlayX(RowColumn.BottomLeft);
+
+            var gameStatus = game.GetStatus();
+
+            gameStatus.Should().Be(GameStatus.XWins);
+        }
+
+        [Test]
+        public void ConsiderDiagonalWinningX()
+        {
+            var game = new TicTakToeGame();
+            game.PlayX(RowColumn.TopLeft);
+            game.PlayY(RowColumn.CenterLeft);
+            game.PlayX(RowColumn.CenterMiddle);
+            game.PlayY(RowColumn.BottomMiddle);
+            game.PlayX(RowColumn.BottomRight);
+
+            var gameStatus = game.GetStatus();
+
+            gameStatus.Should().Be(GameStatus.XWins);
+        }
+
+
+        [Test]
         public void ConsiderVerticalWinningY()
         {
             var game = new TicTakToeGame();

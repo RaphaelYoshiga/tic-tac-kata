@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTakToe.Kata
 {
@@ -17,6 +18,13 @@ namespace TicTakToe.Kata
             }
         }
 
+        private List<List<RowColumn>> WinCombinations = new List<List<RowColumn>>
+        {
+            new List<RowColumn> { RowColumn.TopLeft, RowColumn.CenterMiddle, RowColumn.BottomRight },
+            new List<RowColumn> { RowColumn.TopLeft, RowColumn.CenterLeft, RowColumn.BottomLeft },
+            new List<RowColumn> { RowColumn.TopLeft, RowColumn.TopMiddle, RowColumn.TopRight }
+        };
+
         public void Add(RowColumn column, TicTakChar ticTakChar)
         {
             Plays.Add(column, ticTakChar);
@@ -25,7 +33,7 @@ namespace TicTakToe.Kata
 
         public GameStatus GetGameStatus()
         {
-            if (IsXInPosition(RowColumn.TopLeft) && IsXInPosition(RowColumn.TopMiddle) && IsXInPosition(RowColumn.TopRight))
+            if (AnyWinCondition())
             {
                 return GameStatus.XWins;
             }
@@ -40,14 +48,19 @@ namespace TicTakToe.Kata
             return GameStatus.InPlay;
         }
 
+        private bool AnyWinCondition()
+        {
+            return WinCombinations.Any(p => p.All(x => IsXInPosition(x, TicTakChar.X)));
+        }
+
         private bool IsYInPosition(RowColumn rowColumn)
         {
             return Plays.ContainsKey(rowColumn) && Plays[rowColumn] == TicTakChar.Y;
         }
 
-        private bool IsXInPosition(RowColumn rowColumn)
+        private bool IsXInPosition(RowColumn rowColumn, TicTakChar ticTakCharX)
         {
-            return Plays.ContainsKey(rowColumn) && Plays[rowColumn] == TicTakChar.X;
+            return Plays.ContainsKey(rowColumn) && Plays[rowColumn] == ticTakCharX;
         }
 
         protected bool Equals(Board other)
