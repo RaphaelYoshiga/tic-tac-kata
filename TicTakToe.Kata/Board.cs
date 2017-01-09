@@ -18,11 +18,15 @@ namespace TicTakToe.Kata
             }
         }
 
-        private List<List<RowColumn>> WinCombinations = new List<List<RowColumn>>
+        private readonly IReadOnlyCollection<List<RowColumn>> WinCombinations = new List<List<RowColumn>>
         {
             new List<RowColumn> { RowColumn.TopLeft, RowColumn.CenterMiddle, RowColumn.BottomRight },
             new List<RowColumn> { RowColumn.TopLeft, RowColumn.CenterLeft, RowColumn.BottomLeft },
-            new List<RowColumn> { RowColumn.TopLeft, RowColumn.TopMiddle, RowColumn.TopRight }
+            new List<RowColumn> { RowColumn.TopLeft, RowColumn.TopMiddle, RowColumn.TopRight },
+            new List<RowColumn> { RowColumn.CenterLeft, RowColumn.CenterMiddle, RowColumn.CenterRight },
+            new List<RowColumn> { RowColumn.BottomLeft, RowColumn.BottomMiddle, RowColumn.BottomRight },
+            new List<RowColumn> { RowColumn.TopMiddle, RowColumn.CenterMiddle, RowColumn.BottomMiddle },
+            new List<RowColumn> { RowColumn.TopRight, RowColumn.CenterMiddle, RowColumn.BottomLeft },
         };
 
         public void Add(RowColumn column, TicTakChar ticTakChar)
