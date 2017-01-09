@@ -37,12 +37,10 @@ namespace TicTakToe.Kata
 
         public GameStatus GetGameStatus()
         {
-            if (AnyWinCondition())
-            {
+            if (AnyWinCondition(TicTakChar.X))
                 return GameStatus.XWins;
-            }
 
-            if (IsYInPosition(RowColumn.TopLeft) && IsYInPosition(RowColumn.CenterLeft) && IsYInPosition(RowColumn.BottomLeft))
+            if (AnyWinCondition(TicTakChar.Y))
                 return GameStatus.YWins;
 
             if (Plays.Count == 9)
@@ -52,9 +50,9 @@ namespace TicTakToe.Kata
             return GameStatus.InPlay;
         }
 
-        private bool AnyWinCondition()
+        private bool AnyWinCondition(TicTakChar ticTakCharX)
         {
-            return WinCombinations.Any(p => p.All(x => IsXInPosition(x, TicTakChar.X)));
+            return WinCombinations.Any(p => p.All(x => IsXInPosition(x, ticTakCharX)));
         }
 
         private bool IsYInPosition(RowColumn rowColumn)

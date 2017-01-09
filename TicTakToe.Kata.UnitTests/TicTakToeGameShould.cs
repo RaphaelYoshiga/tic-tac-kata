@@ -196,8 +196,8 @@ namespace TicTakToe.Kata.UnitTests
             game.PlayX(RowColumn.BottomMiddle);
             game.PlayY(RowColumn.CenterLeft);
             game.PlayX(RowColumn.BottomLeft);
-            game.PlayY(RowColumn.CenterRight);
             game.PlayY(RowColumn.BottomRight);
+            game.PlayX(RowColumn.CenterRight);
 
             var gameStatus = game.GetStatus();
 
