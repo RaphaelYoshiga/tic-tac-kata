@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace TicTakToe.Kata
@@ -24,15 +25,29 @@ namespace TicTakToe.Kata
 
         public GameStatus GetGameStatus()
         {
-            if (Plays.ContainsKey(RowColumn.TopLeft) && Plays[RowColumn.TopLeft] == TicTakChar.X &&
-                Plays.ContainsKey(RowColumn.TopMiddle) && Plays[RowColumn.TopMiddle] == TicTakChar.X &&
-                Plays.ContainsKey(RowColumn.TopRight) && Plays[RowColumn.TopRight] == TicTakChar.X
-                )
+            if (IsXInPosition(RowColumn.TopLeft) && IsXInPosition(RowColumn.TopMiddle) && IsXInPosition(RowColumn.TopRight))
             {
                 return GameStatus.XWins;
             }
 
+            if (IsYInPosition(RowColumn.TopLeft) && IsYInPosition(RowColumn.CenterLeft) && IsYInPosition(RowColumn.BottomLeft))
+                return GameStatus.YWins;
+
+            if (Plays.Count == 9)
+                return GameStatus.Draw;
+
+
             return GameStatus.InPlay;
+        }
+
+        private bool IsYInPosition(RowColumn rowColumn)
+        {
+            return Plays.ContainsKey(rowColumn) && Plays[rowColumn] == TicTakChar.Y;
+        }
+
+        private bool IsXInPosition(RowColumn rowColumn)
+        {
+            return Plays.ContainsKey(rowColumn) && Plays[rowColumn] == TicTakChar.X;
         }
 
         protected bool Equals(Board other)

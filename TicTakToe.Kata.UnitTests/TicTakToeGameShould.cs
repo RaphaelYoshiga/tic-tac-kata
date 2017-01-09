@@ -62,7 +62,7 @@ namespace TicTakToe.Kata.UnitTests
         }
 
         [Test]
-        public void ConsiderHorizontalWinning()
+        public void ConsiderHorizontalWinningX()
         {
             var game = new TicTakToeGame();
             game.PlayX(RowColumn.TopLeft);
@@ -74,6 +74,42 @@ namespace TicTakToe.Kata.UnitTests
             var gameStatus = game.GetStatus();
 
             gameStatus.Should().Be(GameStatus.XWins);
+        }
+
+        [Test]
+        public void ConsiderVerticalWinningY()
+        {
+            var game = new TicTakToeGame();
+            game.PlayX(RowColumn.BottomRight);
+            game.PlayY(RowColumn.TopLeft);
+            game.PlayX(RowColumn.CenterMiddle);
+            game.PlayY(RowColumn.CenterLeft);
+            game.PlayX(RowColumn.CenterRight);
+            game.PlayY(RowColumn.BottomLeft);
+
+            var gameStatus = game.GetStatus();
+
+            gameStatus.Should().Be(GameStatus.YWins);
+        }
+
+
+        [Test]
+        public void BecomeADrawWhenAllPositionsFilled()
+        {
+            var game = new TicTakToeGame();
+            game.PlayX(RowColumn.TopLeft);
+            game.PlayY(RowColumn.TopMiddle);
+            game.PlayX(RowColumn.TopRight);
+            game.PlayY(RowColumn.CenterMiddle);
+            game.PlayX(RowColumn.BottomMiddle);
+            game.PlayY(RowColumn.CenterLeft);
+            game.PlayX(RowColumn.BottomLeft);
+            game.PlayY(RowColumn.CenterRight);
+            game.PlayY(RowColumn.BottomRight);
+
+            var gameStatus = game.GetStatus();
+
+            gameStatus.Should().Be(GameStatus.Draw);
         }
     }
 

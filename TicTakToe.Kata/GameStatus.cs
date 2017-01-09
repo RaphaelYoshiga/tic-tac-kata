@@ -9,6 +9,8 @@ namespace TicTakToe.Kata
     public enum GameStatus
     {
         XWins,
-        InPlay
+        InPlay,
+        Draw,
+        YWins
     }
 }
