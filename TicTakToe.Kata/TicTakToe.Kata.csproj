@@ -41,10 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
-    <Compile Include="Column.cs" />
     <Compile Include="GameStatus.cs" />
     <Compile Include="HistoryPlay.cs" />
-    <Compile Include="Row.cs" />
     <Compile Include="RowColumn.cs" />
     <Compile Include="TicTakChar.cs" />
     <Compile Include="TicTakToeGame.cs" />
